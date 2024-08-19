@@ -42,7 +42,7 @@ public class CarController : MonoBehaviour
 
 
         Debug.Log($"<Color=yellow>{number}</color>");
-        //this.transform.Translate(number);
+        this.transform.Translate(number);
         
 
     }
