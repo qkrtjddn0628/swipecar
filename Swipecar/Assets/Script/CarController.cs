@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarController : MonoBehaviour
 {
-    private float CarMoveSpeed;
-    private Vector3 a;
-    private Vector3 b;
+    
+    Vector3 startPos;
+    private float moveSpeed =0;
 
-    float speed = 0;
-    Vector2 startPos;
+    public GameObject textGo;
 
-    // Start is called before the first frame update
+
     void Start()
-    {
-        
+    {       
+
     }
 
     // Update is called once per frame
@@ -30,15 +30,23 @@ public class CarController : MonoBehaviour
         else if(Input.GetMouseButtonUp(0))
         {
             // 마우스 버튼에서 손가락을 때었을 때 좌표
-            Vector2 endPos = Input.mousePosition;
-            float swipeLength = (endPos.x = this.startPos.x);
+            Vector3 endPos = Input.mousePosition;
+            float dirX = (endPos.x = this.startPos.x);
 
             // 스와이프 길이를 처음 속도로 변경한다
-            this.speed = swipeLength / 500.0f;
+            //this.moveSpeed = dirX / 5000.0f;
+
+            if (dirX > 0)
+            {
+                moveSpeed = 0.1f;
+            }
+            else if (dirX < 0)
+            {
+                moveSpeed = -0.1f;
+            }
         }
+        this.transform.Translate(moveSpeed, 0, 0);
+        this.moveSpeed *= 0.98f;
 
-
-        transform.Translate(this.speed, 0, 0);
-        this.speed *= 0.98f;
     }
 }
